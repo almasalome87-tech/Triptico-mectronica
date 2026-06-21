@@ -244,36 +244,54 @@ body {
    CONFIGURACIÓN EXCLUSIVA PARA TELÉFONOS
    ========================================== */
 @media (max-width: 600px) {
+  
+  /* 1. BLOQUEO TOTAL DE SELECCIÓN DE TEXTO (Evita que se sombreen las letras) */
+  .triptico-cerrado, 
+  .triptico-cerrado * {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    -webkit-touch-callout: none !important; /* Evita el menú flotante en iPhone */
+  }
+
   .triptico-cerrado {
     width: 30vw; 
-    user-select: none; /* Bloquea la selección de texto por error */
-    -webkit-user-select: none;
+    cursor: pointer;
   }
 
-  /* Desactivamos por completo el hover en el celular para evitar fallos */
-  .triptico-cerrado:hover .panel-a,
-  .triptico-cerrado:hover .panel-b {
-    transform: none !important;
-    -webkit-transform: none !important;
-  }
-
-  /* El tríptico en el tlf SÓLO se abrirá cuando tenga la clase .abierto (al tocarlo) */
-  .triptico-cerrado.abierto .panel-a {
+  /* 2. APERTURA INMEDIATA CON UN TOQUE (Combina click y hover del tlf para evitar retrasos) */
+  .triptico-cerrado.abierto .panel-a,
+  .triptico-cerrado.abierto:hover .panel-a {
     transform: rotateY(-180deg) !important;
     -webkit-transform: rotateY(-180deg) !important;
-    transition-delay: 0s; 
+    transition-delay: 0s !important;
   }
 
-  .triptico-cerrado.abierto .panel-b {
+  .triptico-cerrado.abierto .panel-b,
+  .triptico-cerrado.abierto:hover .panel-b {
     transform: rotateY(180deg) !important;
     -webkit-transform: rotateY(180deg) !important;
-    transition-delay: 0.8s; /* Tiempo de espera para el segundo panel */
+    transition-delay: 0.8s !important; /* Tiempo de la introducción */
+  }
+
+  /* 3. DESACTIVAR EL FALSO HOVER DEL CELULAR CUANDO ESTÁ CERRADO */
+  .triptico-cerrado:not(.abierto):hover .panel-a,
+  .triptico-cerrado:not(.abierto) .panel-a { 
+    transform: none !important; 
+    -webkit-transform: none !important; 
+  }
+  
+  .triptico-cerrado:not(.abierto):hover .panel-b,
+  .triptico-cerrado:not(.abierto) .panel-b { 
+    transform: none !important; 
+    -webkit-transform: none !important; 
   }
 
   .triptico-cerrado.abierto .panel-a .dorso { box-shadow: -5px 5px 20px rgba(0,0,0,0.6); }
   .triptico-cerrado.abierto .panel-b .dorso { box-shadow: 5px 5px 20px rgba(0,0,0,0.6); }
 
-  /* Ajustes de tamaño internos del contenido en el celular */
+  /* Ajustes de tamaño del contenido interno */
   .cara {
     padding: 8% 5% 5% 5%; 
   }
