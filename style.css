@@ -233,7 +233,7 @@ body {
 .triptico-cerrado:hover .panel-b {
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
-  transition-delay: 10s; 
+  transition-delay: 12s; 
 }
 
 .triptico-cerrado:hover .panel-a .dorso { box-shadow: -5px 5px 20px rgba(0,0,0,0.6); }
