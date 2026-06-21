@@ -233,7 +233,7 @@ body {
 .triptico-cerrado:hover .panel-b {
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
-  transition-delay: 5s; 
+  transition-delay: 10s; 
 }
 
 .triptico-cerrado:hover .panel-a .dorso { box-shadow: -5px 5px 20px rgba(0,0,0,0.6); }
@@ -244,41 +244,112 @@ body {
    CONFIGURACIÓN RESPONSIVA PARA TELÉFONOS
    ========================================== */
 @media (max-width: 600px) {
+  /* El contenedor principal ahora se despliega hacia abajo de forma fluida */
   .triptico-cerrado {
-    width: 31vw; /* Se ajusta exactamente al ancho horizontal de las pantallas de celular */
+    display: flex;
+    flex-direction: column;
+    width: 95vw;
+    max-width: 450px;
+    height: auto;
+    aspect-ratio: auto;
+    perspective: none;
+    -webkit-perspective: none;
+    gap: 20px;
+    margin: 10px auto;
+    cursor: default;
   }
 
+  /* Los paneles dejan de estar encima de otros y se vuelven bloques normales */
+  .panel {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+    -webkit-transform: none !important;
+    transform-style: flat;
+    -webkit-transform-style: flat;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  /* Ordenamos el flujo: Portada primero, luego Introducción/Lapsos */
+  .panel-a { order: 1; }
+  .panel-b { order: 2; }
+  .panel-c { order: 3; }
+
+  /* Las caras de los paneles se adaptan para mostrar todo el contenido */
   .cara {
-    padding: 8% 5% 5% 5%; /* Menos márgenes internos para aprovechar el espacio */
+    position: relative;
+    width: 100%;
+    height: auto;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 25px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: #05050f !important;
   }
 
-  .cara-interior h3 {
-    font-size: 1.1rem;
+  /* Anulamos las rotaciones 3D que rompen el diseño en pantallas móviles */
+  .cara-exterior, .dorso {
+    transform: none !important;
+    -webkit-transform: none !important;
+  }
+
+  /* Ajustes exclusivos para la Portada */
+  .portada {
+    background: linear-gradient(135deg, #060814 0%, #0b112c 50%, #1a0b2e 100%) !important;
+    min-height: 180px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .portada h2 {
+    font-size: 1.4rem;
+  }
+
+  .portada .autor {
+    font-size: 0.95rem;
+    margin-top: 15px;
+  }
+
+  /* Tipografía grande y completamente legible en móviles */
+  .cara-interior h3, .panel-b .cara-exterior .titulo-intro {
+    font-size: 1.5rem;
+    color: #00e6ff;
+    margin-bottom: 10px;
   }
 
   .cara-interior h3 span {
     font-size: 1.5rem;
+    color: #ffffff;
   }
 
-  .panel-b .cara-exterior .titulo-intro {
-    font-size: 0.85rem;
-  }
-
-  /* Reduce levemente el tamaño de la letra en el celular para evitar desbordes */
   .cara-interior p, .panel-b .cara-exterior p {
-    font-size: 0.58rem; 
-    line-height: 1.25;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    text-align: left;
+    color: #e2e8f0;
   }
 
-  .portada h2 {
-    font-size: 0.85rem;
-  }
-  
-  .portada .autor {
-    font-size: 0.7rem;
-  }
-
+  /* Las imágenes toman un tamaño proporcional y no se aplastan */
   .imagen-lapso {
-    margin-top: 8px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin-top: 15px;
+    border-radius: 8px;
+  }
+
+  /* Bloqueamos los efectos de hover de computadora para evitar saltos raros en el celular */
+  .triptico-cerrado:hover .panel-a,
+  .triptico-cerrado:hover .panel-b {
+    transform: none !important;
+    -webkit-transform: none !important;
   }
 }
