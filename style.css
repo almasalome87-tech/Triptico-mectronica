@@ -1,0 +1,284 @@
+/* --- RESET BÁSICO --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- FONDO DE LA PÁGINA --- */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #05070c; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+/* --- CONTENEDOR DEL TRÍPTICO --- */
+.triptico-cerrado {
+  position: relative;
+  width: 30vw;
+  max-width: 250px; 
+  min-width: 120px;  
+  aspect-ratio: 99 / 210; 
+  perspective: 1500px;
+  -webkit-perspective: 1500px;
+  cursor: pointer;
+}
+
+/* --- ESTRUCTURA BASE DE LOS PANELES --- */
+.panel {
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+/* --- CARAS DE PAPEL --- */
+.cara {
+  position: absolute;
+  width: 100%; 
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; /* Fix crucial para iPhone */
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+  align-items: flex-start;
+  padding: 10% 8% 8% 8%; 
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* --- SOLUCIÓN DE CAPAS (Evita el traspaso de texto espejo) --- */
+.cara-exterior {
+  transform: translateZ(2px);
+  -webkit-transform: translateZ(2px);
+}
+
+.dorso { 
+  transform: rotateY(180deg) translateZ(2px); 
+  -webkit-transform: rotateY(180deg) translateZ(2px);
+}
+
+/* --- PALETA TECNOLÓGICA (INTERIOR OSCURO + GLOWS) --- */
+.cara-interior, .panel-b .cara-exterior { 
+  background-color: #03030a;
+  overflow: hidden;
+}
+
+.panel-a .cara-interior {
+  background: 
+    radial-gradient(circle at 10% 0%, rgba(0, 230, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 70% 10%, rgba(160, 0, 255, 0.15) 0%, transparent 60%),
+    #05050f;
+}
+
+.panel-c .cara-interior {
+  background: 
+    radial-gradient(circle at 50% 0%, rgba(0, 100, 255, 0.25) 0%, transparent 60%),
+    #05050f;
+}
+
+.panel-b .cara-interior {
+  background: 
+    radial-gradient(circle at 90% 10%, rgba(255, 0, 180, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, rgba(0, 200, 255, 0.15) 0%, transparent 50%),
+    #05050f;
+}
+
+.panel-b .cara-exterior {
+  background: 
+    radial-gradient(circle at 50% 0%, rgba(160, 0, 255, 0.25) 0%, transparent 60%),
+    #05050f;
+}
+
+/* --- PORTADA --- */
+.portada { 
+  background: linear-gradient(135deg, #060814 0%, #0b112c 50%, #1a0b2e 100%);
+  color: white; 
+  justify-content: space-between; 
+  align-items: center; 
+  border: 2px solid #00e6ff;
+  box-shadow: inset 0 0 25px rgba(0, 230, 255, 0.3), 0 0 20px rgba(0, 230, 255, 0.15);
+  padding: 15% 8% 10% 8%;
+}
+
+.bloque-centro-portada {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto 0;
+}
+
+.portada h2 {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.15rem;
+  color: #00e6ff;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(0, 230, 255, 0.6);
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.portada .linea-decorativa {
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff00bf, transparent);
+  margin: 15px 0 0 0;
+}
+
+.portada .autor {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 0.85rem;
+  color: #ffffff;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* --- DISEÑO DE TEXTO --- */
+.contenido-lapso {
+  width: 100%;
+  z-index: 2;
+}
+
+.cara-interior h3 {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.6rem;
+  line-height: 0.9;
+  font-weight: 900;
+  color: #ffffff;
+  text-align: left;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+.cara-interior h3 span {
+  font-size: 2.1rem;
+  color: #00e6ff;
+  text-shadow: 0 0 10px rgba(0, 230, 255, 0.4);
+}
+
+.panel-b .cara-exterior .titulo-intro {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.15rem; 
+  color: #ffffff;
+  text-align: left;
+  margin-bottom: 10px;
+  letter-spacing: 0px;
+  white-space: nowrap;
+}
+
+.cara-interior p, .panel-b .cara-exterior p {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  font-size: 0.72rem; 
+  font-weight: 400;
+  color: #e2e8f0;
+  text-align: justify;
+  line-height: 1.35;
+  letter-spacing: 0.1px;
+}
+
+.panel-b .cara-exterior .texto-intro {
+  color: #ffffff;
+}
+
+/* --- ESTILO DE IMÁGENES --- */
+.imagen-lapso {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 15px;
+  z-index: 2;
+}
+
+/* --- PANELES INDIVIDUALES --- */
+.panel-c {
+  z-index: 1; 
+  box-shadow: 0 20px 50px rgba(0,0,0,0.7); 
+}
+
+.panel-b {
+  transform-origin: right;
+  -webkit-transform-origin: right;
+  z-index: 2; 
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0s; 
+}
+
+.panel-a {
+  transform-origin: left;
+  -webkit-transform-origin: left;
+  z-index: 3; 
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0.8s; 
+}
+
+/* --- ANIMACIÓN DE APERTURA --- */
+.triptico-cerrado:hover .panel-a {
+  transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg);
+  transition-delay: 0s; 
+}
+
+.triptico-cerrado:hover .panel-b {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  transition-delay: 5s; 
+}
+
+.triptico-cerrado:hover .panel-a .dorso { box-shadow: -5px 5px 20px rgba(0,0,0,0.6); }
+.triptico-cerrado:hover .panel-b .dorso { box-shadow: 5px 5px 20px rgba(0,0,0,0.6); }
+
+
+/* ==========================================
+   CONFIGURACIÓN RESPONSIVA PARA TELÉFONOS
+   ========================================== */
+@media (max-width: 600px) {
+  .triptico-cerrado {
+    width: 31vw; /* Se ajusta exactamente al ancho horizontal de las pantallas de celular */
+  }
+
+  .cara {
+    padding: 8% 5% 5% 5%; /* Menos márgenes internos para aprovechar el espacio */
+  }
+
+  .cara-interior h3 {
+    font-size: 1.1rem;
+  }
+
+  .cara-interior h3 span {
+    font-size: 1.5rem;
+  }
+
+  .panel-b .cara-exterior .titulo-intro {
+    font-size: 0.85rem;
+  }
+
+  /* Reduce levemente el tamaño de la letra en el celular para evitar desbordes */
+  .cara-interior p, .panel-b .cara-exterior p {
+    font-size: 0.58rem; 
+    line-height: 1.25;
+  }
+
+  .portada h2 {
+    font-size: 0.85rem;
+  }
+  
+  .portada .autor {
+    font-size: 0.7rem;
+  }
+
+  .imagen-lapso {
+    margin-top: 8px;
+  }
+}
